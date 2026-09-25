@@ -1,35 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: bms-app
   labels:
     app: bms
+
 spec:
   replicas: 2
+
   selector:
     matchLabels:
       app: bms
+
   template:
     metadata:
       labels:
         app: bms
+
     spec:
       containers:
-      - name: bms-container
-        image: srinivas8056/bms:latest  # Replace with your Docker image
-        ports:         
+        - name: bms-container
+          image: srinivas8056/bms:latest
+          ports:
+            - containerPort: 3000
+
 ---
 apiVersion: v1
 kind: Service
+
 metadata:
   name: bms-service
   labels:
     app: bms
+
 spec:
   type: LoadBalancer
+
   ports:
-  - port: 80
-    targetPort: 3000  # Replace with the port your app runs on
+    - port: 80
+      targetPort: 3000
+
   selector:
     app: bms
-        - containerPort: 3000  # Replace with the port your app runs on
