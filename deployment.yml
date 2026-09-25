@@ -17,5 +17,19 @@ spec:
       containers:
       - name: bms-container
         image: srinivas8056/bms:latest  # Replace with your Docker image
-        ports:
+        ports:         
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bms-service
+  labels:
+    app: bms
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000  # Replace with the port your app runs on
+  selector:
+    app: bms
         - containerPort: 3000  # Replace with the port your app runs on
